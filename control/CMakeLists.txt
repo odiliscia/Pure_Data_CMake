@@ -1,0 +1,32 @@
+cmake_minimum_required(VERSION 3.12)
+project(ColeccionExternalsPD LANGUAGES C)
+
+# 1. DEFINICIONES GLOBALES (Se heredan de forma infalible a los hijos)
+if(WIN32)
+    add_compile_definitions(MSW NT PD PD_LONGINTTYPE=__int64 _CRT_SECURE_NO_WARNINGS)
+    set(DEFAULT_PDPATH "C:/Program Files/Pd/src")
+    set(DEFAULT_PDLPATH "C:/Program Files/Pd/bin")
+elseif(APPLE)
+    add_compile_definitions(MACINTOSH PD)
+    set(DEFAULT_PDPATH "/Applications/Pd-0.55-0.app/Contents/Resources/src")
+    set(DEFAULT_PDLPATH "")
+else()
+    add_compile_definitions(UNX PD)
+    set(DEFAULT_PDPATH "/usr/include/pd")
+    set(DEFAULT_PDLPATH "")
+endif()
+
+# 2. RUTAS ABSOLUTAS CORREGIDAS
+get_filename_component(RAIZ_SUPERIOR "${CMAKE_SOURCE_DIR}" DIRECTORY)
+set(DEST "${RAIZ_SUPERIOR}/externals" CACHE PATH "Destino de los externals")
+set(PDPATH "${DEFAULT_PDPATH}" CACHE PATH "Ruta a m_pd.h")
+set(PDLPATH "${DEFAULT_PDLPATH}" CACHE PATH "Ruta a las librerías (Solo Windows)")
+
+# subcarpetas con los distintos proyectos 
+add_subdirectory(hello)
+add_subdirectory(counter_a)
+add_subdirectory(counter_b)
+add_subdirectory(tutlib)
+add_subdirectory(args)
+add_subdirectory(argsi)
+add_subdirectory(argsio)

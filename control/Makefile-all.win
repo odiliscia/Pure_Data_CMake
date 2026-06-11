@@ -1,0 +1,14 @@
+SUBDIRS = args argsi argsio hello counter_a counter_b
+
+all:
+	@for dir in $(SUBDIRS); do \
+		$(MAKE) -C ./$$dir -f Makefile.win || exit 1; \
+	done
+
+clean:
+	@for dir in $(SUBDIRS); do \
+		$(MAKE) -C ./$$dir -f Makefile.win clean; \
+	done
+
+.PHONY: all clean
+	
