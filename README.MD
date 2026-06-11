@@ -17,6 +17,6 @@ Both the `./control` and `./audio` folders contain the sources and `CMakeLists.t
 Inside both folders, you will also find a file named `commands.txt` containing the basic CMake commands required for compilation.
 
 ## Contact
-odiliscia@gmail.com
+
 You can send comments or questions to: odiliscia@gmail.com
 
